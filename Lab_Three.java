@@ -65,32 +65,24 @@ public class Lab_Three {
 		
 		//Compare 
 		for(int i = swap_index; i < high; i++) {
-			if(arr[piv_index] > arr[i])
+			if(arr[piv_index] > arr[i]) {
 				swap_index++;
+				
+				//Swap Again
+				temp = pivot;
+				arr[piv_index] = arr[swap_index];
+				arr[swap_index] = pivot;
+				piv_index = swap_index;
+				
+				//swap i and swap_index - 1
+				if(i != piv_index) {
+					temp = arr[swap_index - 1];
+					arr[swap_index - 1] = arr[i];
+					arr[i] = temp;
+				}
+
+			}
 		}
-		
-		//Swap Again
-		temp = pivot;
-		arr[piv_index] = arr[swap_index];
-		arr[swap_index] = pivot;
-		piv_index = swap_index;
-		
-		//Reset
-		int left_swap_index = low;
-		int right_swap_index = high;
-		
-		
-		//swap values w
-//		for(int i = 0; i < piv_index; i++) {
-//			if(arr[i] > pivot)
-//				left_swap_index = i;
-//			
-//			if(arr[high - i] < pivot)
-//				right_swap_index = high - i;
-//			
-//			if()
-//		}
-		
 
 		return piv_index;
 	    
@@ -158,6 +150,7 @@ public class Lab_Three {
 		//User inputs Kth Smallest Value to Search in Array
 		System.out.print("Enter kth value: ");
 		int k = console.nextInt();
+		
 		
 		int value = quick_select_small(arr, 0, n - 1, k - 1);
 		System.out.println(Arrays.toString(arr));
