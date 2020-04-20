@@ -12,51 +12,89 @@ public class Lab_Three {
 	 *  3. Hint: Use Partitioning Algorithm
 	 */
 	
-	public static int partition(int arr[], int low, int high) {
-		//Takes the Most Left Index of Current Partition
-		int pivLoc = low;
-		
-		//Used for Comparisons
-		int pivot = arr[high];
-		
-		for(int i = low; i <= high; i++) {
-			//Loops through current Partition
-			
-			if(arr[i] < pivot) {					//Moves values less than pivot to the left side
-				
-				//Swap
-				int temp = arr[i];
-				arr[i] = arr[pivLoc];
-				arr[pivLoc] = temp;
-				
-				pivLoc++;
-			}
-		}
-		
-		//Swap current Pivot with the Value in arr[pivLoc]
-		int temp = arr[high];
-		arr[high] = arr[pivLoc];
-		arr[pivLoc] = temp;
-		
-
-		return pivLoc;
-	}
-	
 //	public static int partition(int arr[], int low, int high) {
-//		//Pivot 
-//		int pivot = arr[high - 1];
-//		int i = high;
-//		if(high - 2 >= 0) {
-//			if((arr[high - 2]) > pivot) {
-//				int temp = arr[high - 2];
-//				arr[high - 2] = pivot;
-//				pivot = temp;
-//				i--;
+//		//Takes the Most Left Index of Current Partition
+//		int pivLoc = low;
+//		
+//		//Used for Comparisons
+//		int pivot = arr[high];
+//		
+//		for(int i = low; i <= high; i++) {
+//			//Loops through current Partition
+//			
+//			if(arr[i] < pivot) {					//Moves values less than pivot to the left side
+//				
+//				//Swap
+//				int temp = arr[i];
+//				arr[i] = arr[pivLoc];
+//				arr[pivLoc] = temp;
+//				
+//				pivLoc++;
 //			}
 //		}
 //		
-//		return i - 1;
+//		//Swap current Pivot with the Value in arr[pivLoc]
+//		int temp = arr[high];
+//		arr[high] = arr[pivLoc];
+//		arr[pivLoc] = temp;
+//		
+//
+//		return pivLoc;
 //	}
+//	
+	
+		
+	public static int partition(int arr[], int low, int high) {
+		//Store Pivot
+		int pivot = arr[high];
+		int piv_index = high;
+		
+		//Index that the pivot will be swapping to
+		int swap_index = low;
+		
+		//Looks for the first element that is greater than pivot
+		while(pivot > arr[swap_index]) {
+			swap_index++;
+		}
+		
+		//Swap
+		int temp = pivot;
+		arr[piv_index] = arr[swap_index];
+		arr[swap_index] = pivot;
+		piv_index =  swap_index;
+		
+		//Compare 
+		for(int i = swap_index; i < high; i++) {
+			if(arr[piv_index] > arr[i])
+				swap_index++;
+		}
+		
+		//Swap Again
+		temp = pivot;
+		arr[piv_index] = arr[swap_index];
+		arr[swap_index] = pivot;
+		piv_index = swap_index;
+		
+		//Reset
+		int left_swap_index = low;
+		int right_swap_index = high;
+		
+		
+		//swap values w
+//		for(int i = 0; i < piv_index; i++) {
+//			if(arr[i] > pivot)
+//				left_swap_index = i;
+//			
+//			if(arr[high - i] < pivot)
+//				right_swap_index = high - i;
+//			
+//			if()
+//		}
+		
+
+		return piv_index;
+	    
+	}
 	
 	
 	public static int quick_select_small(int arr[], int low, int high, int k) {
