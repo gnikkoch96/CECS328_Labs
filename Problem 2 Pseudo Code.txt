@@ -66,3 +66,21 @@ output_results(boolean arr[]){
 	else
 		output no	
 }
+
+public static void BFS(Node s, LinkedList<Node> graph){
+	Queue q
+	q.add(s)
+	
+	while(q is not empty){
+		Node temp = q.pop
+		
+		for(Node x: temp.adj){
+			if(x.parent == null){
+				x.parent = temp;
+				q.add(x)
+				
+				update node s visited array to true depending on the index of node x
+			}
+		}
+	}
+}
