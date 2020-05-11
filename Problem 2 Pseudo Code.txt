@@ -1,0 +1,68 @@
+main(){
+	String input[] = ...
+	
+	LinkedList<Node> graph
+	create_nodes(graph, input)
+	store_adj(graph)
+
+	boolean isCyclable[] 
+
+	for(int i = 0 -> graph.size()) 
+		BFS(graph.get(i), graph)
+	
+	is_node_cycle(graph, isCyclable)
+	output_results(isCyclable)
+}
+
+
+create_nodes(LinkedList<node> graph, String input[]){
+	Node next
+	for(int i = 0 -> input.length){
+		next = Node(input[i])
+		graph.add(next);
+	}
+}
+
+
+store_adj(LinkedList<Node> graph){
+	for(int i = 0 -> graph.size()){
+		int compare_index = 0;	
+		while(compare_index < graph.size()){
+			if(compare_index != 1){
+				compare node[i] last letter with node[compare_index] first letter, 
+				if they are the same letter then store it in node[i].adj
+			}
+			compare_index++;
+		}
+	}
+}
+
+
+
+is_node_cycle(LinkedList<Node> graph, boolean isCyclable[]){
+	for(int i = 0 -> graph.size()){
+		int count = 0;
+		for(int j = 0 -> graph.size()){
+			if(graph[i].visited == true)
+				count++
+		}
+
+		if(count < isCyclable.length)
+			isCyclable[i] = false	
+		else
+			isCyclable[i] = true
+	}
+}
+
+output_results(boolean arr[]){
+	boolean cycle = true;
+	for(int i = 0 to arr.length){
+		if(arr[i] == false)
+			cycle = false;
+	}
+
+	if(cycle)
+		output yes
+	else
+		output no	
+}
