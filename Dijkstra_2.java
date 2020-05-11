@@ -25,7 +25,7 @@ public class Dijkstra_2 {
 			public Node adj[];
 			
 			//Weight 
-			public int weight[];
+			public LinkedList<Integer> weight;
 			
 			//Distance
 			public int dst;
@@ -37,24 +37,8 @@ public class Dijkstra_2 {
 					return false;
 			}	
 	}
-	
-	//Finds the index of the smallest weight
-	public static Node find_min_weight(Node s) {
-		int min_weight_index = 0;
-		int min_weight = s.weight[0];
+
 		
-		for(int i = 1; i < s.weight.length; i++) {
-			if(s.weight[i] < min_weight) {
-				min_weight = s.weight[i];
-				min_weight_index = i;
-			}
-		}
-		
-		return s.adj[min_weight_index];
-		
-	}
-	
-	
 	public static void dijkstra_algorithm(Node vertex) {
 		vertex.dst = 0;
 		vertex.parent = vertex;
@@ -66,13 +50,15 @@ public class Dijkstra_2 {
 			Node next = q.peek();
 			q.poll();
 			
+			int i = 0;
 			for(Node n: next.adj) {
-				int distance = next.dst + n.weight(next);
+				int distance = next.dst + next.weight.get(i);
 				if(distance < n.dst) {
 					n.parent = next;
 					n.dst = distance;
 					q.add(n);
 				}
+				i++;
 			}
 		}
 	}
@@ -112,34 +98,59 @@ public class Dijkstra_2 {
 		h.adj = new Node[] {g};
 		
 		
-		a.weight = new int[] {2,15,3};
-		b.weight = new int[] {15,8,2};
-		c.weight = new int[] {2,8,7,5};
-		d.weight = new int[] {3,1};
-		e.weight = new int[] {1,2};
-		f.weight = new int[] {1,7,2};
-		g.weight = new int[] {5,2,1};
-		h.weight = new int[] {1};
+		a.weight = new LinkedList<Integer>();
+		a.weight.add(2);
+		a.weight.add(15);
+		a.weight.add(3);
 		
-		
-		
-		
-		
+		b.weight = new LinkedList<Integer>();
+		b.weight.add(15);
+		b.weight.add(8);
+		b.weight.add(2);
 
-		
+		c.weight = new LinkedList<Integer>();
+		c.weight.add(2);
+		c.weight.add(8);
+		c.weight.add(7);
+		c.weight.add(5);
+
+		d.weight = new LinkedList<Integer>();
+		d.weight.add(3);
+		d.weight.add(1);
+
+		e.weight = new LinkedList<Integer>();
+		e.weight.add(1);
+		e.weight.add(2);
+
+		f.weight = new LinkedList<Integer>();
+		f.weight.add(1);
+		f.weight.add(7);
+		f.weight.add(2);
+
+		g.weight = new LinkedList<Integer>();
+		g.weight.add(5);
+		g.weight.add(2);
+		g.weight.add(1);
+
+		h.weight = new LinkedList<Integer>();
+		h.weight.add(1);
+
+	
 		//Initialize their distance to a high number
 		for(int i = 1; i < graph.size(); i++) {
 			graph.get(i).dst = 1000;
 		}
 		
 		System.out.println("Before Dijkstra---------------------Shortest Distance from A");
-		for(int i = 0; i < graph.length; i++) {
-			System.out.println(graph[i].name + " : " + graph[i].dst);
+		for(int i = 0; i < graph.size(); i++) {
+			System.out.println(graph.get(i).name + " : " + graph.get(i).dst);
 		}
 		
+		dijkstra_algorithm(a);
+		
 		System.out.println("After Dijkstra---------------------Shortest Distance from A");
-		for(int i = 0; i < graph.length; i++) {
-			System.out.println(graph[i].name + " : " + graph[i].dst);
+		for(int i = 0; i < graph.size(); i++) {
+			System.out.println(graph.get(i).name + " : " + graph.get(i).dst);
 		}
 		
 	}
